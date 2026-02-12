@@ -1,0 +1,62 @@
+{% comment %}
+  Section: Page Title + Breadcrumb
+  Works for: pages, articles, products, collections, blogs
+{% endcomment %}
+
+<section class="page-header-wrapper">
+  <div class="page-header__inner">
+    <h1 class="page-title">
+      {% if template contains 'article' %}
+        {{ article.title }}
+      {% elsif template contains 'blog' %}
+        {{ blog.title }}
+      {% elsif template contains 'product' %}
+        Product
+      {% elsif template contains 'collection' %}
+        {{ collection.title }}
+      {% elsif template contains 'cart' %}
+        Shopping Cart
+      {% else %}
+        {{ page.title }}
+      {% endif %}
+    </h1>
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="{{ routes.root_url }}">Home</a>
+
+      {% if template contains 'page' %}
+        <span>›</span><span>{{ page.title }}</span>
+
+      {% elsif template contains 'article' %}
+        <span>›</span><a href="{{ blog.url }}">{{ blog.title }}</a>
+        <span>›</span><span>{{ article.title }}</span>
+
+      {% elsif template contains 'blog' %}
+        <span>›</span><span>{{ blog.title }}</span>
+
+      {% elsif template contains 'product' %}
+        <span>›</span><a href="{{ product.collections.first.url }}">{{ product.collections.first.title }}</a>
+        <span>›</span><span>{{ product.title }}</span>
+
+      {% elsif template contains 'collection' %}
+        <span>›</span><span>{{ collection.title }}</span>
+        {% elsif template contains 'cart' %}
+        <span>›</span><span>Shopping Cart</span>
+      {% endif %}
+    </nav>
+  </div>
+</section>
+
+ 
+
+{% schema %}
+{
+  "name": "Page Title & Breadcrumb",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Page Title & Breadcrumb"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,142 @@
+<section class="certificate-section"
+  data-slides="{{ section.settings.slides_to_show }}"
+  data-speed="{{ section.settings.speed }}"
+>
+  <div class="{% if section.settings.layout == 'container' %}page-width{% else %}full-width{% endif %}">
+
+    {% if section.settings.title != blank %}
+      <h2 class="certificate-title">
+        {{ section.settings.title }}
+      </h2>
+    {% endif %}
+
+    <div class="certificate-slider">
+      {% for block in section.blocks %}
+        <div class="certificate-item" {{ block.shopify_attributes }}>
+          {% if block.settings.image %}
+            <img
+              src="{{ block.settings.image | image_url: width: 600 }}"
+              alt="Certificate"
+              loading="lazy"
+            >
+          {% else %}
+            {{ 'image' | placeholder_svg_tag }}
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+ 
+
+<script>
+(function () {
+  function initCertificateSlider(section) {
+    const slider = section.querySelector('.certificate-slider');
+    if (!slider || $(slider).hasClass('slick-initialized')) return;
+
+    const slides = parseInt(section.dataset.slides, 10) || 5;
+    const speed = parseInt(section.dataset.speed, 10) || 2500;
+
+    $(slider).slick({
+      slidesToShow: slides,
+      slidesToScroll: 1,
+      autoplay: true,
+      autoplaySpeed: speed,
+      infinite: true,
+      arrows: false,
+      dots: false,
+      pauseOnHover: true,
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: { slidesToShow: Math.min(4, slides) }
+        },
+        {
+          breakpoint: 768,
+          settings: { slidesToShow: Math.min(3, slides) }
+        },
+        {
+          breakpoint: 480,
+          settings: { slidesToShow: Math.min(2, slides) }
+        }
+      ]
+    });
+  }
+
+  document.querySelectorAll('.certificate-section').forEach(initCertificateSlider);
+
+  document.addEventListener('shopify:section:load', function (e) {
+    const section = e.target.querySelector('.certificate-section');
+    if (section) initCertificateSlider(section);
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Custom Certificate",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Certificate"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Section Width",
+      "options": [
+        { "value": "container", "label": "Container" },
+        { "value": "full", "label": "Full Width" }
+      ],
+      "default": "container"
+    },
+    {
+      "type": "range",
+      "id": "slides_to_show",
+      "label": "Slides visible (Desktop)",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "label": "Autoplay Speed (ms)",
+      "min": 1000,
+      "max": 5000,
+      "step": 500,
+      "default": 2500
+    }
+  ],
+  "blocks": [
+    {
+      "type": "certificate",
+      "name": "Certificate Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Certificate Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Certificate",
+      "blocks": [
+        { "type": "certificate" },
+        { "type": "certificate" },
+        { "type": "certificate" },
+        { "type": "certificate" },
+        { "type": "certificate" }
+      ]
+    }
+  ]
+}
+{% endschema %}

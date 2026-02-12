@@ -1,0 +1,244 @@
+<section class="video-grid-section" style="--columns: {{ section.settings.columns }};">
+  <div class="page-width">
+
+    {% if section.settings.title != blank %}
+      <h2 class="video-grid-title">{{ section.settings.title }}</h2>
+    {% endif %}
+
+    <div class="video-grid">
+      {% for block in section.blocks %}
+        {% assign video_url = block.settings.video_url %}
+        {% assign youtube_id = '' %}
+        {% assign vimeo_id = '' %}
+
+        {% if video_url contains 'youtube.com' %}
+          {% assign youtube_id = video_url | split: 'v=' | last | split: '&' | first %}
+        {% elsif video_url contains 'youtu.be' %}
+          {% assign youtube_id = video_url | split: '/' | last %}
+        {% elsif video_url contains 'vimeo.com' %}
+          {% assign vimeo_id = video_url | split: '/' | last %}
+        {% endif %}
+
+        <div class="video-card" {{ block.shopify_attributes }}>
+          <div class="video-thumb"
+               data-video="{{ video_url }}"
+               data-youtube="{{ youtube_id }}"
+               data-vimeo="{{ vimeo_id }}">
+
+            {% if block.settings.thumbnail %}
+              <img src="{{ block.settings.thumbnail | image_url: width: 800 }}" alt="">
+            {% elsif youtube_id != blank %}
+              <img src="https://img.youtube.com/vi/{{ youtube_id }}/hqdefault.jpg" alt="">
+            {% else %}
+              <div class="video-placeholder"></div>
+            {% endif %}
+
+            <span class="play-icon"></span>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+  </div>
+
+  <!-- Popup -->
+  <div class="video-popup">
+    <div class="video-popup-inner">
+      <span class="video-close">&times;</span>
+      <div class="video-iframe"></div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .video-grid-title {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 28px;
+  font-weight: 600;
+  color: #E31E24;
+  text-decoration: underline;
+}
+
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.video-thumb {
+  position: relative;
+  cursor: pointer;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #000;
+}
+
+.video-thumb img,
+.video-placeholder {
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  display: block;
+}
+
+.video-placeholder {
+  background: #111;
+}
+
+/* Play icon */
+.play-icon {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.play-icon::before {
+  content: '';
+  width: 56px;
+  height: 40px;
+  background: #ff0000;
+  border-radius: 10px;
+}
+.play-icon::after {
+  content: '';
+  position: absolute;
+  border-left: 16px solid #fff;
+  border-top: 9px solid transparent;
+  border-bottom: 9px solid transparent;
+  margin-left: 4px;
+}
+
+/* Popup */
+.video-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.8);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+.video-popup.is-active {
+  display: flex;
+}
+.video-popup-inner {
+  width: 90%;
+  max-width: 900px;
+  background: #000;
+  position: relative;
+}
+.video-popup iframe,
+.video-popup video {
+  width: 100%;
+  height: 500px;
+}
+
+.video-close {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  color: #fff;
+  font-size: 32px;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .video-popup iframe,
+  .video-popup video {
+    height: 360px;
+  }
+}
+
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const popup = document.querySelector('.video-popup');
+  const iframeWrap = popup.querySelector('.video-iframe');
+  const closeBtn = popup.querySelector('.video-close');
+
+  document.querySelectorAll('.video-thumb').forEach(item => {
+    item.addEventListener('click', function () {
+      const url = this.dataset.video;
+      const yt = this.dataset.youtube;
+      const vm = this.dataset.vimeo;
+      let embed = '';
+
+      if (yt) {
+        embed = `<iframe src="https://www.youtube.com/embed/${yt}?autoplay=1&rel=0"
+                 frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+      } else if (vm) {
+        embed = `<iframe src="https://player.vimeo.com/video/${vm}?autoplay=1"
+                 frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
+      } else {
+        embed = `<video controls autoplay playsinline>
+                   <source src="${url}">
+                 </video>`;
+      }
+
+      iframeWrap.innerHTML = embed;
+      popup.classList.add('is-active');
+    });
+  });
+
+  closeBtn.addEventListener('click', closePopup);
+  popup.addEventListener('click', e => {
+    if (e.target === popup) closePopup();
+  });
+
+  function closePopup() {
+    popup.classList.remove('is-active');
+    iframeWrap.innerHTML = '';
+  }
+});
+</script>
+
+
+{% schema %}
+{
+  "name": "Multi Video Grid",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section title",
+      "default": "Videos"
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "Videos per row",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 4
+    }
+  ],
+  "blocks": [
+    {
+      "type": "video",
+      "name": "Video Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "thumbnail",
+          "label": "Custom thumbnail (optional)"
+        },
+        {
+          "type": "url",
+          "id": "video_url",
+          "label": "Video URL (YouTube / Vimeo / MP4)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Multi Video Grid"
+    }
+  ]
+}
+{% endschema %}
+

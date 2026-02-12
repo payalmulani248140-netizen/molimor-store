@@ -1,0 +1,238 @@
+<section class="social-follow-section">
+  {% if section.settings.title != blank %}
+    <p class="social-title">{{ section.settings.title }}</p>
+  {% endif %}
+
+  {% if section.settings.subtitle != blank %}
+    <p class="social-subtitle">{{ section.settings.subtitle }}</p>
+  {% endif %}
+  <div class="page-width social-follow-wrapper">
+  
+
+    <div class="social-center molimor">
+        {% if section.settings.left_image != blank %}
+      <div class="social-side social-side--left">
+        <img
+          src="{{ section.settings.left_image | image_url: width: 300 }}"
+          alt="Left image"
+          loading="lazy"
+        >
+      </div>
+      {% endif %}
+      <div class="social-icons">
+        {% if section.settings.instagram_link != blank %}
+          <a href="{{ section.settings.instagram_link }}" target="_blank" aria-label="Instagram">
+            <svg viewBox="0 0 24 24">
+              <path d="M7 2C4.24 2 2 4.24 2 7v10c0 2.76 2.24 5 5 5h10c2.76 0 5-2.24 5-5V7c0-2.76-2.24-5-5-5H7zm10 2c1.65 0 3 1.35 3 3v10c0 1.65-1.35 3-3 3H7c-1.65 0-3-1.35-3-3V7c0-1.65 1.35-3 3-3h10zm-5 3a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6zm4.5-.9a1.1 1.1 0 100 2.2 1.1 1.1 0 000-2.2z"/>
+            </svg>
+          </a>
+        {% endif %}
+
+        {% if section.settings.facebook_link != blank %}
+          <a href="{{ section.settings.facebook_link }}" target="_blank" aria-label="Facebook">
+            <svg viewBox="0 0 24 24">
+              <path d="M22 12a10 10 0 10-11.5 9.9v-7h-2v-3h2V9.5c0-2 1.2-3.1 3-3.1.9 0 1.8.1 1.8.1v2h-1c-1 0-1.3.6-1.3 1.2V11h2.3l-.4 3h-1.9v7A10 10 0 0022 12z"/>
+            </svg>
+          </a>
+        {% endif %}
+
+
+          {% if section.settings.youtube_link != blank %}
+          <a href="{{ section.settings.youtube_link }}" target="_blank" aria-label="Facebook">
+              <?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+              <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20.5245 6.00694C20.3025 5.81544 20.0333 5.70603 19.836 5.63863C19.6156 5.56337 19.3637 5.50148 19.0989 5.44892C18.5677 5.34348 17.9037 5.26005 17.1675 5.19491C15.6904 5.06419 13.8392 5 12 5C10.1608 5 8.30956 5.06419 6.83246 5.1949C6.09632 5.26005 5.43231 5.34348 4.9011 5.44891C4.63628 5.50147 4.38443 5.56337 4.16403 5.63863C3.96667 5.70603 3.69746 5.81544 3.47552 6.00694C3.26514 6.18846 3.14612 6.41237 3.07941 6.55976C3.00507 6.724 2.94831 6.90201 2.90314 7.07448C2.81255 7.42043 2.74448 7.83867 2.69272 8.28448C2.58852 9.18195 2.53846 10.299 2.53846 11.409C2.53846 12.5198 2.58859 13.6529 2.69218 14.5835C2.74378 15.047 2.81086 15.4809 2.89786 15.8453C2.97306 16.1603 3.09841 16.5895 3.35221 16.9023C3.58757 17.1925 3.92217 17.324 4.08755 17.3836C4.30223 17.461 4.55045 17.5218 4.80667 17.572C5.32337 17.6733 5.98609 17.7527 6.72664 17.8146C8.2145 17.9389 10.1134 18 12 18C13.8865 18 15.7855 17.9389 17.2733 17.8146C18.0139 17.7527 18.6766 17.6733 19.1933 17.572C19.4495 17.5218 19.6978 17.461 19.9124 17.3836C20.0778 17.324 20.4124 17.1925 20.6478 16.9023C20.9016 16.5895 21.0269 16.1603 21.1021 15.8453C21.1891 15.4809 21.2562 15.047 21.3078 14.5835C21.4114 13.6529 21.4615 12.5198 21.4615 11.409C21.4615 10.299 21.4115 9.18195 21.3073 8.28448C21.2555 7.83868 21.1874 7.42043 21.0969 7.07448C21.0517 6.90201 20.9949 6.72401 20.9206 6.55976C20.8539 6.41236 20.7349 6.18846 20.5245 6.00694Z" stroke="#e31e24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M14.5385 11.5L10.0962 14.3578L10.0962 8.64207L14.5385 11.5Z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+          </a>
+        {% endif %}
+
+
+      </div>
+    </div>
+
+
+  <div class="social-center girness">
+           {% if section.settings.right_image != blank %}
+      <div class="social-side social-side--right">
+        <img
+          src="{{ section.settings.right_image | image_url: width: 300 }}"
+          alt="Right image"
+          loading="lazy"
+        >
+      </div>
+    {% endif %}
+      <div class="social-icons">
+        {% if section.settings.instagram_link1 != blank %}
+          <a href="{{ section.settings.instagram_link1 }}" target="_blank" aria-label="Instagram">
+            <svg viewBox="0 0 24 24">
+              <path d="M7 2C4.24 2 2 4.24 2 7v10c0 2.76 2.24 5 5 5h10c2.76 0 5-2.24 5-5V7c0-2.76-2.24-5-5-5H7zm10 2c1.65 0 3 1.35 3 3v10c0 1.65-1.35 3-3 3H7c-1.65 0-3-1.35-3-3V7c0-1.65 1.35-3 3-3h10zm-5 3a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6zm4.5-.9a1.1 1.1 0 100 2.2 1.1 1.1 0 000-2.2z"/>
+            </svg>
+          </a>
+        {% endif %}
+
+        {% if section.settings.facebook_link1 != blank %}
+          <a href="{{ section.settings.facebook_link1 }}" target="_blank" aria-label="Facebook">
+            <svg viewBox="0 0 24 24">
+              <path d="M22 12a10 10 0 10-11.5 9.9v-7h-2v-3h2V9.5c0-2 1.2-3.1 3-3.1.9 0 1.8.1 1.8.1v2h-1c-1 0-1.3.6-1.3 1.2V11h2.3l-.4 3h-1.9v7A10 10 0 0022 12z"/>
+            </svg>
+          </a>
+        {% endif %}
+
+
+          {% if section.settings.youtube_link1 != blank %}
+          <a href="{{ section.settings.youtube_link1 }}" target="_blank" aria-label="Facebook">
+              <?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+              <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20.5245 6.00694C20.3025 5.81544 20.0333 5.70603 19.836 5.63863C19.6156 5.56337 19.3637 5.50148 19.0989 5.44892C18.5677 5.34348 17.9037 5.26005 17.1675 5.19491C15.6904 5.06419 13.8392 5 12 5C10.1608 5 8.30956 5.06419 6.83246 5.1949C6.09632 5.26005 5.43231 5.34348 4.9011 5.44891C4.63628 5.50147 4.38443 5.56337 4.16403 5.63863C3.96667 5.70603 3.69746 5.81544 3.47552 6.00694C3.26514 6.18846 3.14612 6.41237 3.07941 6.55976C3.00507 6.724 2.94831 6.90201 2.90314 7.07448C2.81255 7.42043 2.74448 7.83867 2.69272 8.28448C2.58852 9.18195 2.53846 10.299 2.53846 11.409C2.53846 12.5198 2.58859 13.6529 2.69218 14.5835C2.74378 15.047 2.81086 15.4809 2.89786 15.8453C2.97306 16.1603 3.09841 16.5895 3.35221 16.9023C3.58757 17.1925 3.92217 17.324 4.08755 17.3836C4.30223 17.461 4.55045 17.5218 4.80667 17.572C5.32337 17.6733 5.98609 17.7527 6.72664 17.8146C8.2145 17.9389 10.1134 18 12 18C13.8865 18 15.7855 17.9389 17.2733 17.8146C18.0139 17.7527 18.6766 17.6733 19.1933 17.572C19.4495 17.5218 19.6978 17.461 19.9124 17.3836C20.0778 17.324 20.4124 17.1925 20.6478 16.9023C20.9016 16.5895 21.0269 16.1603 21.1021 15.8453C21.1891 15.4809 21.2562 15.047 21.3078 14.5835C21.4114 13.6529 21.4615 12.5198 21.4615 11.409C21.4615 10.299 21.4115 9.18195 21.3073 8.28448C21.2555 7.83868 21.1874 7.42043 21.0969 7.07448C21.0517 6.90201 20.9949 6.72401 20.9206 6.55976C20.8539 6.41236 20.7349 6.18846 20.5245 6.00694Z" stroke="#076536" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M14.5385 11.5L10.0962 14.3578L10.0962 8.64207L14.5385 11.5Z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+          </a>
+        {% endif %}
+
+
+      </div>
+    </div>
+
+
+
+
+  </div>
+</section>
+
+<style>
+  .social-follow-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 90px;
+  }
+
+  .social-center {
+    text-align: center;
+  }
+  .social-side--right{
+  text-align: right
+  }
+  .social-side--right img{
+  width: 118px;
+  height: 66px;
+  }
+
+  .social-title {
+    font-size: 46px;
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 6px;
+    text-align: center;
+    margin-top: 0;
+  }
+
+  .social-subtitle {
+    margin-bottom: 16px;
+    margin-top: 0px;
+    text-align: center;
+  }
+
+  .social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+  }
+
+  .social-icons svg {
+    width: 36px;
+    height: 36px;
+    fill: #076536;
+    transition: transform 0.3s ease;
+  }
+  .molimor .social-icons svg{
+    fill: #e31e24;
+  }
+  .social-icons a:hover svg {
+    transform: scale(1.15);
+  }
+
+  .social-side img {
+    max-width: 100%;
+  }
+
+  @media (max-width: 768px) {
+    .social-follow-wrapper {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Custom Social Media",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "left_image",
+      "label": "Left image / logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "right_image",
+      "label": "Right image / logo"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Follow Us On Social Media"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Come, be a part of our journey"
+    },
+    {
+      "type": "header",
+      "content": "Molimore"
+    },
+    {
+      "type": "url",
+      "id": "instagram_link",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "url",
+      "id": "facebook_link",
+      "label": "Facebook URL"
+    },
+    {
+      "type": "url",
+      "id": "youtube_link",
+      "label": "Youtube URL"
+    },
+    {
+      "type": "header",
+      "content": "Girness"
+    },
+    {
+      "type": "url",
+      "id": "instagram_link1",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "url",
+      "id": "facebook_link1",
+      "label": "Facebook URL"
+    },
+    {
+      "type": "url",
+      "id": "youtube_link1",
+      "label": "Youtube URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Social Media"
+    }
+  ]
+}
+{% endschema %}

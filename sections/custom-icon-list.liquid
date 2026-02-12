@@ -1,0 +1,103 @@
+{% if section.settings.title != blank %}
+      <h2 class="logo-slider-title">
+        {{ section.settings.title }}
+      </h2>
+    {% endif %}
+<section class="logo-slider-section">
+  <div>
+
+    
+
+    <div
+      class="logo-slider"
+      style="--logos-per-view: {{ section.settings.items_per_view }};"
+    >
+      <div class="logo-track">
+        {% for block in section.blocks %}
+          <div class="logo-item" {{ block.shopify_attributes }}>
+            {% if block.settings.link != blank %}
+              <a href="{{ block.settings.link }}" target="_blank">
+            {% endif %}
+
+            <img
+              src="{{ block.settings.icon | image_url: width: 200 }}"
+              alt="Marketplace Logo"
+              loading="lazy"
+            >
+
+            {% if block.settings.link != blank %}
+              </a>
+            {% endif %}
+          </div>
+        {% endfor %}
+
+        <!-- Duplicate for infinite scroll -->
+        {% for block in section.blocks %}
+          <div class="logo-item">
+            <img
+              src="{{ block.settings.icon | image_url: width: 200 }}"
+              alt="Marketplace Logo"
+              loading="lazy"
+            >
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+  </div>
+</section>
+
+ 
+
+{% schema %}
+{
+  "name": "Custom Icons",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "We Are Available"
+    },
+    {
+      "type": "range",
+      "id": "items_per_view",
+      "label": "Icons visible at a time (Desktop)",
+      "min": 3,
+      "max": 8,
+      "step": 1,
+      "default": 6
+    }
+  ],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Logo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Logo Image"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Optional Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Icons",
+      "blocks": [
+        { "type": "logo" },
+        { "type": "logo" },
+        { "type": "logo" },
+        { "type": "logo" },
+        { "type": "logo" }
+      ]
+    }
+  ]
+}
+{% endschema %}

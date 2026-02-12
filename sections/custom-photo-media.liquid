@@ -1,0 +1,153 @@
+<section class="tabbed-image-gallery" id="tabbed-{{ section.id }}">
+  <div class="page-width">
+
+    <!-- Tabs -->
+    <div class="gallery-tabs">
+      <button class="gallery-tab is-active" data-target="photos-{{ section.id }}">{{  section.settings.heading }}</button>
+      {% comment %} <span class="divider">|</span>
+      <button class="gallery-tab" data-target="awards-{{ section.id }}">Awards &amp; Organizations</button> {% endcomment %}
+    </div>
+
+    <!-- PHOTOS -->
+    <div class="gallery-panel is-active" id="photos-{{ section.id }}">
+      <div class="masonry-css">
+        {% for block in section.blocks %}
+          {% if block.type == 'photo' %}
+            <div class="masonry-item">
+              {% if block.settings.image %}
+                <img src="{{ block.settings.image | image_url: width: 1200 }}" loading="lazy">
+              {% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- AWARDS -->
+    {% comment %} <div class="gallery-panel" id="awards-{{ section.id }}">
+      <div class="masonry-css awards">
+        {% for block in section.blocks %}
+          {% if block.type == 'award' %}
+            <div class="masonry-item award-item">
+              {% if block.settings.image %}
+                <img src="{{ block.settings.image | image_url: width: 900 }}" loading="lazy">
+              {% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div> {% endcomment %}
+
+  </div>
+</section>
+
+<style>
+/* Tabs */
+.gallery-tabs {
+  text-align: center;
+  margin-bottom: 30px;
+}
+.gallery-tab {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #E31E24;
+  font-size: 28px;
+  opacity: 0.5;
+}
+.gallery-tab.is-active {
+  color: #d60000;
+  font-weight: 600;
+  opacity: 1;
+}
+.divider { margin: 0 6px; color: #ccc; }
+
+/* Panels */
+.gallery-panel { display: none; }
+.gallery-panel.is-active { display: block; }
+
+/* PURE CSS MASONRY */
+.masonry-css {
+  column-count: 4;
+  column-gap: 3px;
+}
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 3px;
+}
+.masonry-item img {
+  width: 100%;
+  display: block;
+  border-radius: 6px;
+}
+
+/* Awards card look */
+.awards .award-item {
+  background: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .masonry-css { column-count: 2; }
+}
+@media (max-width: 600px) {
+  .masonry-css { column-count: 1; }
+}
+</style>
+
+<script>
+(function () {
+  const section = document.getElementById('tabbed-{{ section.id }}');
+  if (!section) return;
+
+  const tabs = section.querySelectorAll('.gallery-tab');
+  const panels = section.querySelectorAll('.gallery-panel');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', function () {
+      const target = section.querySelector('#' + this.dataset.target);
+
+      tabs.forEach(t => t.classList.remove('is-active'));
+      panels.forEach(p => p.classList.remove('is-active'));
+
+      this.classList.add('is-active');
+      target.classList.add('is-active');
+    });
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Tabbed Masonry Gallery ",
+  "settings": [
+    {
+      "type": "text",
+      "id":"heading",
+      "label": "Heading"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "photo",
+      "name": "Photo Image",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" }
+      ]
+    },
+    {
+      "type": "award",
+      "name": "Award Image",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Tabbed Masonry Gallery" }
+  ]
+}
+{% endschema %}

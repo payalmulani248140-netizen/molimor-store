@@ -1,0 +1,289 @@
+{{ 'section-contact-form.css' | asset_url | stylesheet_tag }}
+
+<section class="pp-contact-section color-{{ section.settings.color_scheme }}">
+  <div class="page-width pp-contact-wrapper section-{{ section.id }}-padding">
+    <!-- LEFT CONTENT -->
+    <div class="pp-contact-left">
+      <h2 class="pp-contact-left-title">Let’s Talk</h2>
+
+      <p class="pp-contact-left-desc">
+        Whether you're a customer with a question about our Molimor or Girnes products, a retailer interested in our range, or have a general inquiry, our team is ready to assist you.
+      </p>
+
+      <div class="pp-contact-info">
+        <div class="pp-contact-info-item">
+          <span class="pp-contact-label">Email</span>
+          <span class="pp-contact-value">{{ section.settings.email }}</span>
+        </div>
+
+        <div class="pp-contact-info-item">
+          <span class="pp-contact-label">Phone</span>
+          <span class="pp-contact-value">{{ section.settings.phone }}</span>
+        </div>
+
+        <div class="pp-contact-info-item">
+          <span class="pp-contact-label">Location</span>
+          <span class="pp-contact-value">{{ section.settings.address }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT FORM -->
+    <div class="pp-contact-right">
+      <h2 class="pp-contact-right-title">Get in <span>Touch</span></h2>
+
+      {% form 'contact', id: 'PPContactForm', class: 'pp-contact-form' %}
+        {% if form.posted_successfully? %}
+          <p class="pp-contact-success">
+            {{ 'templates.contact.form.post_success' | t }}
+          </p>
+        {% endif %}
+
+        <input
+          class="pp-contact-input"
+          type="text"
+          name="contact[name]"
+          placeholder="Name *"
+          required
+        >
+
+        <input
+          class="pp-contact-input"
+          type="email"
+          name="contact[email]"
+          placeholder="Email *"
+          required
+        >
+
+        <select class="pp-contact-input" name="contact[inquiry]">
+          <option value="">Inquiry</option>
+          <option>Support</option>
+          <option>Sales</option>
+          <option>General</option>
+        </select>
+
+        <textarea
+          class="pp-contact-textarea"
+          name="contact[body]"
+          placeholder="Comment or Message *"
+          rows="5"
+          required
+        ></textarea>
+
+        <button type="submit" class="pp-contact-submit">SEND</button>
+      {% endform %}
+    </div>
+  </div>
+
+  {% if section.settings.map_embed != blank %}
+    <div class="pp-contact-map page-width">
+      {{ section.settings.map_embed }}
+    </div>
+  {% endif %}
+</section>
+
+<style>
+    .pp-contact-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 70px;
+      align-items: flex-start;
+      background: linear-gradient(to bottom, #fff, #f2f5f3);
+      padding: 50px 100px !important;
+    }
+
+    /* LEFT */
+    .pp-contact-left-title {
+      font-size: 34px;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    .pp-contact-left-desc {
+      color: #666;
+      margin-bottom: 35px;
+      max-width: 420px;
+    }
+
+    .pp-contact-info-item {
+      margin-bottom: 22px;
+    }
+
+    .pp-contact-label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 5px;
+      font-size: 24px;
+      line-height: 1;
+    }
+
+    .pp-contact-value {
+      color: #444;
+    }
+
+    /* RIGHT */
+    .pp-contact-right-title {
+      font-size: 34px;
+      font-weight: 700;
+      margin-bottom: 25px;
+    }
+
+    .pp-contact-right-title span {
+      color: #0b5c2f;
+    }
+
+    .pp-contact-form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .pp-contact-input,
+    .pp-contact-textarea {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+
+    .pp-contact-textarea {
+      resize: none;
+    }
+
+    .pp-contact-submit {
+      width: 100%;
+      background: #0b5c2f;
+      color: #fff;
+      padding: 14px;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .pp-contact-submit:hover {
+      background: #094b26;
+    }
+
+    .pp-contact-success {
+      color: green;
+      margin-bottom: 15px;
+    }
+    .pp-contact-map {
+      width: 100%;
+      height: 380px;
+      margin-top: 60px;
+    }
+
+    .pp-contact-map iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      .pp-contact-wrapper {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+    @media (max-width: 425px) {
+     .page-header-wrapper {
+        padding: 20px 0 !important;
+        text-align: center;
+    }
+    .page-header-wrapper .page-title {
+        font-size: 25px !important;
+    }
+    .page-header-wrapper .breadcrumb a{
+          font-size: 12px !important;
+    }
+    .page-header-wrapper .breadcrumb span{
+          margin: 0 5px !important;
+          font-size: 12px !important;
+    }
+    .pp-contact-wrapper{
+      padding: 0px 25px !important;
+    }
+    .pp-contact-left-title {
+      font-size: 25px;
+      margin-top: 5px;
+    }
+    .pp-contact-left-desc{
+            margin-bottom: 15px;
+    }
+    .pp-contact-label{
+          font-size: 14px;
+    }
+    .pp-contact-info-item {
+      margin-bottom: 15px;
+    }
+    .pp-contact-wrapper{
+            gap: 0px;
+    }
+    .pp-contact-right-title {
+      font-size: 25px;
+      margin-bottom: 15px;
+      margin-top: 10px;
+    }
+    .pp-contact-input, .pp-contact-textarea {
+      padding: 7px;
+      margin-bottom: 10px;
+      font-size: 12px;
+  }
+  .pp-contact-submit{
+      padding: 7px;
+    font-size: 14px;
+  }
+  .pp-contact-map{
+      height: 250px;
+    margin-top: 30px;
+  }
+    }
+</style>
+
+{% schema %}
+{
+  "name": "Custom Contact Form",
+  "settings": [
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Email",
+      "default": "info@molimor.co"
+    },
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "Phone",
+      "default": "+91 90811 11299"
+    },
+    {
+      "type": "textarea",
+      "id": "address",
+      "label": "Address",
+      "default": "Plot No. 26, Ekta Industrial Estate, Tempa Gali, GIDC, Pipodara, Surat, Gujarat 394110"
+    },
+    {
+      "type": "textarea",
+      "id": "map_embed",
+      "label": "Google Map Embed Code",
+      "info": "Paste iframe embed code from Google Maps"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Contact Form"
+    }
+  ]
+}
+{% endschema %}

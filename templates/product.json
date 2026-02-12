@@ -1,0 +1,253 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "breadcrumb_88gdEd": {
+      "type": "breadcrumb",
+      "name": "Page Title & Breadcrumb",
+      "settings": {}
+    },
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "custom_liquid_UUdpHW": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% if product.metafields.custom.short_description.value %}\n<div class=\"short-des\">\n {{ product.metafields.custom.short_description.value  }}</div>\n{% endif %}"
+          }
+        },
+        "custom_liquid_3aBDdn": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% if product.metafields.custom.features_details.value %}\n<div class=\"feature-details\">  \n<h2>Features & Details</h2>\n<ul>\n{% for feature in product.metafields.custom.features_details.value %}\n      <li> {{ feature }}</li>\n {% endfor %}\n    </ul>\n</div>\n{% endif %}"
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "text_Y4Kaxd": {
+          "type": "text",
+          "settings": {
+            "text": "Est. Delivery Time 2-3 Days",
+            "text_style": "body"
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": false
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "disabled": true,
+          "settings": {}
+        },
+        "share": {
+          "type": "share",
+          "disabled": true,
+          "settings": {
+            "share_label": "Share"
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "price",
+        "custom_liquid_UUdpHW",
+        "custom_liquid_3aBDdn",
+        "variant_picker",
+        "text_Y4Kaxd",
+        "buy_buttons",
+        "quantity_selector",
+        "share"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "color_scheme": "scheme-1",
+        "media_size": "medium",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "gallery_layout": "thumbnail_slider",
+        "mobile_thumbnails": "hide",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "padding_top": 0,
+        "padding_bottom": 12
+      }
+    },
+    "1766051035c7d15a10": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_b6d6b14_hytJMX": {
+          "type": "ai_gen_block_b6d6b14",
+          "settings": {
+            "tab_1_title": "Descriptions",
+            "tab_1_content": "{{ product.description }}",
+            "tab_2_title": "Benefits",
+            "tab_2_content": "<p>{{ product.metafields.custom.benefits.value }}</p>",
+            "tab_3_title": "Customer Feedback",
+            "max_width": 1200,
+            "tab_font_size": 16,
+            "tab_font_weight": "600",
+            "tab_padding_vertical": 16,
+            "tab_padding_horizontal": 24,
+            "tab_text_color": "#666666",
+            "tab_active_color": "#121212",
+            "tab_border_thickness": 2,
+            "tab_border_color": "#e5e5e5",
+            "content_font_size": 15,
+            "content_text_color": "#333333"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_b6d6b14_hytJMX"
+      ],
+      "settings": {}
+    },
+    "related-products": {
+      "type": "related-products",
+      "settings": {
+        "heading": "Related Products",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "standard",
+        "padding_top": 36,
+        "padding_bottom": 28
+      }
+    },
+    "product_collapsible_content_G44ktK": {
+      "type": "product-collapsible-content",
+      "name": "Product FAQ",
+      "settings": {
+        "caption": "",
+        "heading": "FAQ",
+        "heading_size": "h1",
+        "heading_alignment": "center",
+        "layout": "none",
+        "container_color_scheme": "",
+        "color_scheme": "",
+        "open_first_collapsible_row": false,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "1766033137d46dfbc8": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_m4iaLx": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_m4iaLx"
+      ],
+      "disabled": true,
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "custom_icon_list_ayLFQH": {
+      "type": "custom-icon-list",
+      "blocks": {
+        "logo_ybYDXy": {
+          "type": "logo",
+          "settings": {
+            "icon": "shopify://shop_images/meesho.png",
+            "link": ""
+          }
+        },
+        "logo_qMz3hK": {
+          "type": "logo",
+          "settings": {
+            "icon": "shopify://shop_images/flipkart_1.png",
+            "link": ""
+          }
+        },
+        "logo_JiPwGb": {
+          "type": "logo",
+          "settings": {
+            "icon": "shopify://shop_images/svg1936.png",
+            "link": ""
+          }
+        },
+        "logo_f8PWEY": {
+          "type": "logo",
+          "settings": {
+            "icon": "shopify://shop_images/jiomart-beta-seeklogo_1.png",
+            "link": ""
+          }
+        },
+        "logo_kMaa9j": {
+          "type": "logo",
+          "settings": {
+            "icon": "shopify://shop_images/XMLID_418.png",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "logo_ybYDXy",
+        "logo_qMz3hK",
+        "logo_JiPwGb",
+        "logo_f8PWEY",
+        "logo_kMaa9j"
+      ],
+      "disabled": true,
+      "name": "Custom Icons",
+      "settings": {
+        "title": "We Are Available",
+        "items_per_view": 6
+      }
+    }
+  },
+  "order": [
+    "breadcrumb_88gdEd",
+    "main",
+    "1766051035c7d15a10",
+    "related-products",
+    "product_collapsible_content_G44ktK",
+    "1766033137d46dfbc8",
+    "custom_icon_list_ayLFQH"
+  ]
+}

@@ -1,0 +1,177 @@
+<section class="crazy-deals-section">
+  <div class="page-width">
+    {% if section.settings.title != blank %}
+      <h2 class="crazy-deals-title">
+        {{ section.settings.title }}
+      </h2>
+    {% endif %}
+
+    <div class="crazy-deals-grid">
+      {% for block in section.blocks %}
+        <div class="deal-card" {{ block.shopify_attributes }}>
+
+          <div class="deal-card-inner {% unless section.settings.show_card_bg %}deal-card-inner--no-bg{% endunless %}" {{ block.shopify_attributes }}">
+
+            <div class="deal-image">
+              {% if block.settings.image %}
+                <img
+                  src="{{ block.settings.image | image_url: width: 400 }}"
+                  alt="{{ block.settings.offer_text }}"
+                  loading="lazy"
+                >
+              {% else %}
+                {{ 'product-1' | placeholder_svg_tag }}
+              {% endif %}
+
+              {%- if block.settings.button_position == 'inside' and block.settings.button_link != blank -%}
+                <a href="{{ block.settings.button_link }}" class="deal-btn deal-btn--inside">
+                  {{ block.settings.button_label }}
+                </a>
+              {%- endif -%}
+
+            </div>
+          </div>
+
+          {%- if block.settings.button_position == 'outside' and block.settings.button_link != blank -%}
+            <a href="{{ block.settings.button_link }}" class="deal-btn deal-btn--outside">
+              {{ block.settings.button_label }}
+            </a>
+          {%- endif -%}
+
+        </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+<style>
+/* ================= DEAL CARD ================= */
+.deal-card {
+  text-align: center;
+}
+
+.deal-card-inner {
+  position: relative;
+}
+
+.deal-image {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Card background OFF */
+.deal-card-inner--no-bg {
+  background: transparent;
+  padding: 0;
+}
+/* ================= BUTTON STYLES ================= */
+.deal-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background: #000;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+/* Outside button (default) */
+.deal-btn--outside {
+  margin-top: 12px;
+}
+
+/* Inside image button */
+.deal-btn--inside {
+  position: absolute;
+  left: 50%;
+  bottom: 50px;
+  transform: translateX(-50%);
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.85);
+}
+
+/* Hover effect */
+.deal-btn:hover {
+  background: #222;
+}
+</style>
+
+{% schema %}
+{
+  "name": "Custom Crazy Deals",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Crazy Deals"
+    },
+    {
+  "type": "checkbox",
+  "id": "show_card_bg",
+  "label": "Show card background",
+  "default": true
+}
+  ],
+  "blocks": [
+    {
+      "type": "deal",
+      "name": "Deal Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "offer_text",
+          "label": "Offer Text",
+          "default": "Buy Any ₹199"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Product Image"
+        },
+        {
+          "type": "select",
+          "id": "button_position",
+          "label": "Button Position",
+          "default": "outside",
+          "options": [
+            {
+              "value": "outside",
+              "label": "Below Image (Default)"
+            },
+            {
+              "value": "inside",
+              "label": "Inside Image (Bottom Center)"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button Label",
+          "default": "Shop Now →"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Crazy Deals",
+      "blocks": [
+        { "type": "deal" },
+        { "type": "deal" },
+        { "type": "deal" },
+        { "type": "deal" }
+      ]
+    }
+  ]
+}
+{% endschema %}

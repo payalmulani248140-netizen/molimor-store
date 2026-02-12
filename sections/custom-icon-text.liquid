@@ -1,0 +1,87 @@
+<section class="mv-stair">
+  <div class="page-width">
+    <div class="mv-stair-grid">
+      {% for block in section.blocks %}
+        <div class="mv-stair-col">
+          <div
+            class="mv-stair-card card-{{ forloop.index }}"
+            {{ block.shopify_attributes }}
+          >
+            {% if block.settings.icon %}
+              <div class="mv-stair-icon">
+                <img
+                  src="{{ block.settings.icon | image_url: width: 120 }}"
+                  alt="{{ block.settings.title }}"
+                >
+              </div>
+            {% endif %}
+
+            <h3 class="mv-stair-title">{{ block.settings.title }}</h3>
+
+            <div class="mv-stair-text">
+              {{ block.settings.text }}
+            </div>
+          </div>
+
+          {% if block.settings.below_text != blank %}
+            <p
+              class="mv-stair-below"
+              style="color: {{ block.settings.below_text_color }};"
+            >
+              {{ block.settings.below_text }}
+            </p>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+ 
+
+{% schema %}
+{
+  "name": "Custom Icon Text",
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Description"
+        },
+        {
+          "type": "text",
+          "id": "below_text",
+          "label": "Below Card Text (optional)"
+        },
+        {
+          "type": "color",
+          "id": "below_text_color",
+          "label": "Below Text Color",
+          "default": "#1e7b4a"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 3,
+  "presets": [
+    {
+      "name": "Custom Icon Text",
+      "blocks": [{ "type": "item" }, { "type": "item" }, { "type": "item" }]
+    }
+  ]
+}
+{% endschema %}

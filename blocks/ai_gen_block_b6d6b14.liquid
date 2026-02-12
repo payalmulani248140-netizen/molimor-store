@@ -1,0 +1,476 @@
+{% doc %}
+  @prompt
+    https://prnt.sc/IyhT85-ksycJ
+    
+    need tab like reference screenshot
+    
+    Descriptions
+    Benefits
+    Customer Feedback
+    
+    above 3 tab, i need judgeme review app widget in customer feedback
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-product-tabs-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    padding: 40px 20px;
+  }
+
+  .ai-product-tabs__container-{{ ai_gen_id }} {
+    max-width: {{ block.settings.max_width }}px;
+    margin: 0 auto;
+  }
+
+  .ai-product-tabs__tab-list-{{ ai_gen_id }} {
+    display: flex;
+    gap: 0;
+    border-bottom: {{ block.settings.tab_border_thickness }}px solid {{ block.settings.tab_border_color }};
+    margin-bottom: 30px;
+    list-style: none;
+    padding: 0;
+    margin-top: 0;
+  }
+
+  .ai-product-tabs__tab-button-{{ ai_gen_id }} {
+    background: none;
+    border: none;
+    padding: {{ block.settings.tab_padding_vertical }}px {{ block.settings.tab_padding_horizontal }}px;
+    font-size: {{ block.settings.tab_font_size }}px;
+    font-weight: {{ block.settings.tab_font_weight }};
+    color: {{ block.settings.tab_text_color }};
+    cursor: pointer;
+    position: relative;
+    transition: color 0.3s ease;
+    border-bottom: {{ block.settings.tab_border_thickness }}px solid transparent;
+    margin-bottom: -{{ block.settings.tab_border_thickness }}px;
+  }
+
+  .ai-product-tabs__tab-button-{{ ai_gen_id }}:hover {
+    color: {{ block.settings.tab_active_color }};
+  }
+
+  .ai-product-tabs__tab-button-{{ ai_gen_id }}.active {
+    color: {{ block.settings.tab_active_color }};
+    border-bottom-color: {{ block.settings.tab_active_color }};
+  }
+
+  .ai-product-tabs__panel-{{ ai_gen_id }} {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .ai-product-tabs__panel-{{ ai_gen_id }}.active {
+    display: block;
+    opacity: 1;
+  }
+
+  .ai-product-tabs__content-{{ ai_gen_id }} {
+    color: {{ block.settings.content_text_color }};
+    font-size: {{ block.settings.content_font_size }}px;
+    line-height: 1.6;
+  }
+
+  .ai-product-tabs__content-{{ ai_gen_id }} h1,
+  .ai-product-tabs__content-{{ ai_gen_id }} h2,
+  .ai-product-tabs__content-{{ ai_gen_id }} h3,
+  .ai-product-tabs__content-{{ ai_gen_id }} h4,
+  .ai-product-tabs__content-{{ ai_gen_id }} h5,
+  .ai-product-tabs__content-{{ ai_gen_id }} h6 {
+    margin-top: 0;
+    margin-bottom: 15px;
+  }
+
+  .ai-product-tabs__content-{{ ai_gen_id }} p {
+    margin-top: 0;
+    margin-bottom: 15px;
+  }
+
+  .ai-product-tabs__content-{{ ai_gen_id }} ul,
+  .ai-product-tabs__content-{{ ai_gen_id }} ol {
+    margin-bottom: 15px;
+    padding-left: 20px;
+  }
+
+  .ai-product-tabs__empty-state-{{ ai_gen_id }} {
+    padding: 40px 20px;
+    text-align: center;
+    color: #999;
+    font-style: italic;
+  }
+
+  .ai-product-tabs__reviews-{{ ai_gen_id }} {
+    min-height: 200px;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-product-tabs__tab-list-{{ ai_gen_id }} {
+      flex-wrap: wrap;
+    }
+
+    .ai-product-tabs__tab-button-{{ ai_gen_id }} {
+      font-size: {{ block.settings.tab_font_size | times: 0.9 }}px;
+      padding: {{ block.settings.tab_padding_vertical | times: 0.8 }}px {{ block.settings.tab_padding_horizontal | times: 0.8 }}px;
+    }
+  }
+{% endstyle %}
+
+<product-tabs-{{ ai_gen_id }} class="ai-product-tabs-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-product-tabs__container-{{ ai_gen_id }}">
+    <ul class="ai-product-tabs__tab-list-{{ ai_gen_id }}" role="tablist">
+      <li role="presentation">
+        <H2
+          class="ai-product-tabs__tab-button-{{ ai_gen_id }} active"
+          role="tab"
+          aria-selected="true"
+          aria-controls="ai-product-tabs-panel-1-{{ ai_gen_id }}"
+          id="ai-product-tabs-tab-1-{{ ai_gen_id }}"
+          data-tab="1"
+        >
+          {{ block.settings.tab_1_title }}
+        </H2>
+      </li>
+      <li role="presentation">
+        <H2
+          class="ai-product-tabs__tab-button-{{ ai_gen_id }}"
+          role="tab"
+          aria-selected="false"
+          aria-controls="ai-product-tabs-panel-2-{{ ai_gen_id }}"
+          id="ai-product-tabs-tab-2-{{ ai_gen_id }}"
+          data-tab="2"
+        >
+          {{ block.settings.tab_2_title }}
+        </H2>
+      </li>
+      <li role="presentation">
+        <H2
+          class="ai-product-tabs__tab-button-{{ ai_gen_id }}"
+          role="tab"
+          aria-selected="false"
+          aria-controls="ai-product-tabs-panel-3-{{ ai_gen_id }}"
+          id="ai-product-tabs-tab-3-{{ ai_gen_id }}"
+          data-tab="3"
+        >
+          {{ block.settings.tab_3_title }}
+        </H2>
+      </li>
+    </ul>
+
+    <div
+      class="ai-product-tabs__panel-{{ ai_gen_id }} active"
+      role="tabpanel"
+      id="ai-product-tabs-panel-1-{{ ai_gen_id }}"
+      aria-labelledby="ai-product-tabs-tab-1-{{ ai_gen_id }}"
+    >
+      {% if block.settings.tab_1_content != blank %}
+        <div class="ai-product-tabs__content-{{ ai_gen_id }}">
+          {{ block.settings.tab_1_content }}
+        </div>
+      {% else %}
+        <div class="ai-product-tabs__empty-state-{{ ai_gen_id }}">
+          Add content for {{ block.settings.tab_1_title }}
+        </div>
+      {% endif %}
+    </div>
+
+    <div
+      class="ai-product-tabs__panel-{{ ai_gen_id }}"
+      role="tabpanel"
+      id="ai-product-tabs-panel-2-{{ ai_gen_id }}"
+      aria-labelledby="ai-product-tabs-tab-2-{{ ai_gen_id }}"
+    >
+      {% if block.settings.tab_2_content != blank %}
+        <div class="ai-product-tabs__content-{{ ai_gen_id }}">
+          {{ block.settings.tab_2_content }}
+        </div>
+      {% else %}
+        <div class="ai-product-tabs__empty-state-{{ ai_gen_id }}">
+          Add content for {{ block.settings.tab_2_title }}
+        </div>
+      {% endif %}
+    </div>
+
+    <div
+      class="ai-product-tabs__panel-{{ ai_gen_id }}"
+      role="tabpanel"
+      id="ai-product-tabs-panel-3-{{ ai_gen_id }}"
+      aria-labelledby="ai-product-tabs-tab-3-{{ ai_gen_id }}"
+    >
+      <div class="ai-product-tabs__reviews-{{ ai_gen_id }}">
+        <div id="judgeme_product_reviews" class="jdgm-widget jdgm-review-widget" data-product-title="{{ product.title }}" data-id="{{ product.id }}">
+          {{ product.metafields.judgeme.widget }}
+        </div>
+      </div>
+    </div>
+  </div>
+</product-tabs-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class ProductTabs{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.tabs = this.querySelectorAll('.ai-product-tabs__tab-button-{{ ai_gen_id }}');
+        this.panels = this.querySelectorAll('.ai-product-tabs__panel-{{ ai_gen_id }}');
+        this.setupEventListeners();
+      }
+
+      setupEventListeners() {
+        this.tabs.forEach((tab) => {
+          tab.addEventListener('click', () => {
+            const tabNumber = tab.getAttribute('data-tab');
+            this.switchTab(tabNumber);
+          });
+
+          tab.addEventListener('keydown', (e) => {
+            this.handleKeyboardNavigation(e);
+          });
+        });
+      }
+
+      switchTab(tabNumber) {
+        this.tabs.forEach((tab) => {
+          tab.classList.remove('active');
+          tab.setAttribute('aria-selected', 'false');
+        });
+
+        this.panels.forEach((panel) => {
+          panel.classList.remove('active');
+        });
+
+        const activeTab = this.querySelector(`[data-tab="${tabNumber}"]`);
+        const activePanel = this.querySelector(`#ai-product-tabs-panel-${tabNumber}-{{ ai_gen_id }}`);
+
+        if (activeTab && activePanel) {
+          activeTab.classList.add('active');
+          activeTab.setAttribute('aria-selected', 'true');
+          activePanel.classList.add('active');
+
+          if (tabNumber === '3' && typeof jdgm !== 'undefined') {
+            setTimeout(function() {
+              if (typeof jdgm.customWidget === 'function') {
+                jdgm.customWidget();
+              }
+            }, 100);
+          }
+        }
+      }
+
+      handleKeyboardNavigation(e) {
+        const currentTab = e.target;
+        const tabsArray = Array.from(this.tabs);
+        const currentIndex = tabsArray.indexOf(currentTab);
+
+        let newIndex;
+
+        if (e.key === 'ArrowRight') {
+          e.preventDefault();
+          newIndex = currentIndex + 1 >= tabsArray.length ? 0 : currentIndex + 1;
+        } else if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          newIndex = currentIndex - 1 < 0 ? tabsArray.length - 1 : currentIndex - 1;
+        } else if (e.key === 'Home') {
+          e.preventDefault();
+          newIndex = 0;
+        } else if (e.key === 'End') {
+          e.preventDefault();
+          newIndex = tabsArray.length - 1;
+        }
+
+        if (newIndex !== undefined) {
+          tabsArray[newIndex].focus();
+          const tabNumber = tabsArray[newIndex].getAttribute('data-tab');
+          this.switchTab(tabNumber);
+        }
+      }
+    }
+
+    customElements.define('product-tabs-{{ ai_gen_id }}', ProductTabs{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Product tabs",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Tab 1"
+    },
+    {
+      "type": "text",
+      "id": "tab_1_title",
+      "label": "Tab title",
+      "default": "Descriptions"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_1_content",
+      "label": "Tab content",
+      "default": "<p>Add your product description here. Include key features, specifications, and benefits.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Tab 2"
+    },
+    {
+      "type": "text",
+      "id": "tab_2_title",
+      "label": "Tab title",
+      "default": "Benefits"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_2_content",
+      "label": "Tab content",
+      "default": "<p>List the benefits of your product here. Explain how it solves customer problems.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Tab 3 - Judge.me reviews"
+    },
+    {
+      "type": "paragraph",
+      "content": "The Customer Feedback tab displays Judge.me product reviews automatically. Make sure the Judge.me app is installed and configured."
+    },
+    {
+      "type": "text",
+      "id": "tab_3_title",
+      "label": "Tab title",
+      "default": "Customer Feedback"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 600,
+      "max": 1400,
+      "step": 100,
+      "unit": "px",
+      "label": "Maximum width",
+      "default": 1200
+    },
+    {
+      "type": "header",
+      "content": "Tab style"
+    },
+    {
+      "type": "range",
+      "id": "tab_font_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 16
+    },
+    {
+      "type": "select",
+      "id": "tab_font_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semi bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "range",
+      "id": "tab_padding_vertical",
+      "min": 8,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "label": "Vertical padding",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "tab_padding_horizontal",
+      "min": 16,
+      "max": 48,
+      "step": 4,
+      "unit": "px",
+      "label": "Horizontal padding",
+      "default": 24
+    },
+    {
+      "type": "color",
+      "id": "tab_text_color",
+      "label": "Text color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "tab_active_color",
+      "label": "Active color",
+      "default": "#121212"
+    },
+    {
+      "type": "range",
+      "id": "tab_border_thickness",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "label": "Border thickness",
+      "default": 2
+    },
+    {
+      "type": "color",
+      "id": "tab_border_color",
+      "label": "Border color",
+      "default": "#e5e5e5"
+    },
+    {
+      "type": "header",
+      "content": "Content style"
+    },
+    {
+      "type": "range",
+      "id": "content_font_size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 15
+    },
+    {
+      "type": "color",
+      "id": "content_text_color",
+      "label": "Text color",
+      "default": "#333333"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product tabs"
+    }
+  ]
+}
+{% endschema %}

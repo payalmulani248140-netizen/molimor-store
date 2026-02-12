@@ -1,0 +1,116 @@
+<section class="combo-section">
+  <div class="page-width">
+
+    {% if section.settings.title != blank %}
+      <h2 class="combo-title">
+        {{ section.settings.title }}
+      </h2>
+    {% endif %}
+
+    <div class="combo-grid">
+      {% for block in section.blocks %}
+        <div
+          class="combo-card"
+          style="background-color: {{ block.settings.bg_color }};"
+          {{ block.shopify_attributes }}
+        >
+          <div class="combo-card-inner">
+
+            <!-- Image -->
+            <div class="combo-image">
+              {% if block.settings.image %}
+                <img
+                  src="{{ block.settings.image | image_url: width: 500 }}"
+                  alt="{{ block.settings.heading }}"
+                  loading="lazy"
+                >
+              {% else %}
+                {{ 'product-1' | placeholder_svg_tag }}
+              {% endif %}
+            </div>
+
+            <!-- Content -->
+            <div class="combo-content">
+              <h3>{{ block.settings.heading }}</h3>
+              <p>{{ block.settings.description }}</p>
+
+              {% if block.settings.button_link %}
+                <a href="{{ block.settings.button_link }}" class="combo-btn">
+                  {{ block.settings.button_label }}
+                </a>
+              {% endif %}
+            </div>
+
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+ 
+
+{% schema %}
+{
+  "name": "Combo Offers",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Combo"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "combo",
+      "name": "Custom Combo Offers",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Combo Image"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Bringing Quality to Every Home, Every Day"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Shop ₹50 product and get free delivery anywhere."
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button Label",
+          "default": "Shop Now →"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background Color",
+          "default": "#f1dfbf"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Combo Offers",
+      "blocks": [
+        { "type": "combo" },
+        { "type": "combo" }
+      ]
+    }
+  ]
+}
+{% endschema %}
